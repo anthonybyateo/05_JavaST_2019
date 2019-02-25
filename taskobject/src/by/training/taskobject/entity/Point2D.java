@@ -1,33 +1,48 @@
 /*
- * @(#)Blah.java 1.82 99/03/18
- *
- * Copyright (c) 1994-1999 Sun Microsystems, Inc.
- * 901 San Antonio Road, Palo Alto, California, 94303, U.S.A.
- * All Rights Reserved.
- *
- * This software is the confidential and proprietary information of Sun
- * Microsystems, Inc. ("Confidential Information"). You shall not
- * disclose such Confidential Information and shall use it only in
- * accordance with the terms of the license agreement you entered into
- * with Sun.
+ * @(#)Point2D.java 1.00 19/02/15
  */
 
 package by.training.taskobject.entity;
 
-public class Point2D {
+/**
+ * It is the description of entity of Point2D.
+ *
+ * @version 1.00 15 Feb 2019
+ * @author Anton Radchanka
+ * @since 1.00
+ */
+public class Point2D extends Shape {
+
+    /** x is a coordinate of point.*/
     private double x;
+
+    /** y is a coordinate of point.*/
     private double y;
 
+    /**
+     * Constructs a point with two double parameter.
+     *
+     * @param x is a coordinate of point.
+     * @param y is a coordinate of point.
+     */
     public Point2D(final double x, final double y) {
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * Constructs a point with a double parameter.
+     *
+     * @param x is a coordinate of point.
+     */
     public Point2D(final double x) {
         this.x = x;
         this.y = 0;
     }
 
+    /**
+     * Constructs a point without parameters.
+     */
     public Point2D() {
         this.x = 0;
         this.y = 0;
@@ -51,7 +66,8 @@ public class Point2D {
 
     @Override
     public int hashCode() {
-        return (int) (31 * getX() + getY());
+        final int prime = 31;
+        return (int) (prime * getX() + getY());
     }
 
     @Override
@@ -60,13 +76,13 @@ public class Point2D {
             return true;
         }
 
-        if (getClass() != obj.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
 
         Point2D point = (Point2D) obj;
 
-        if (this.hashCode() != point.hashCode()) {
+        if (hashCode() != point.hashCode()) {
             return false;
         }
 
@@ -77,15 +93,15 @@ public class Point2D {
         if (y != point.y) {
             return false;
         }
+
         return true;
     }
 
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        result.append(getClass().getName() + "@");
-        result.append("x: " + this.getX());
-        result.append("y " + this.getY());
+        result.append("(" + this.getX());
+        result.append(", " + this.getY() + ")");
         return result.toString();
     }
 }

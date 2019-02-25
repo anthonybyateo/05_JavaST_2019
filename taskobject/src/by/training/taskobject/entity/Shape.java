@@ -1,4 +1,3 @@
 package by.training.taskobject.entity;
 
-public class Shape {
-}
+public abstract class Shape { }

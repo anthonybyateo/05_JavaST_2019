@@ -1,21 +1,21 @@
 package by.training.taskobject.entity;
 
-public class Oval {
+public class Ellipse extends Shape {
 
     private Point2D point1;
     private Point2D point2;
 
-    public Oval(final Point2D point1, final Point2D point2) {
+    public Ellipse(final Point2D point1, final Point2D point2) {
         this.point1 = point1;
         this.point2 = point2;
     }
 
-    public Oval(final Point2D point1) {
+    public Ellipse(final Point2D point1) {
         this.point1 = point1;
         this.point2 = new Point2D();
     }
 
-    public Oval() {
+    public Ellipse() {
         this.point1 = new Point2D();
         this.point2 = new Point2D();
     }
@@ -38,7 +38,8 @@ public class Oval {
 
     @Override
     public int hashCode() {
-        return (int) (31 * ((this.getPoint1() == null) ? 0 : this.getPoint1().hashCode())
+        final int prime = 31;
+        return (int) (prime * ((this.getPoint1() == null) ? 0 : this.getPoint1().hashCode())
                 + ((this.getPoint2() == null) ? 0 : this.getPoint2().hashCode()));
     }
 
@@ -48,45 +49,26 @@ public class Oval {
             return true;
         }
 
-        if (getClass() != obj.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
 
-        Oval oval = (Oval) obj;
+        Ellipse ellipse = (Ellipse) obj;
 
-        if (this.hashCode() != oval.hashCode()) {
+        if (this.hashCode() != ellipse.hashCode()) {
             return false;
         }
 
-        if (point1 == null) {
-            if (oval.point1 != null) {
-                return false;
-            }
-        }else {
-                if (!point1.equals(oval.point1)) {
-                    return false;
-                }
-        }
-
-            if (point2 == null) {
-                if (oval.point2 != null) {
-                    return false;
-                }
-            }else {
-                    if (!point2.equals(oval.point2)) {
-                        return false;
-                    }
-                }
-        return true;
+        return (point1 == ellipse.point1 || (point1 != null && point1.equals(ellipse.getPoint1())))
+                && (point2 == ellipse.point2 || (point2 != null && point2.equals(ellipse.getPoint1())));
     }
 
 
         @Override
         public String toString() {
             StringBuilder result = new StringBuilder();
-            result.append(getClass().getName() + "@");
             result.append("point1: " + this.getPoint1());
-            result.append("point2: " + this.getPoint2());
+            result.append(" point2: " + this.getPoint2());
             return result.toString();
         }
     }

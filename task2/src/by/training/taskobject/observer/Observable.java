@@ -1,8 +1,10 @@
 package by.training.taskobject.observer;
 
+import by.training.taskobject.repository.Repository;
+
 public interface Observable {
 
-    public void attach(Observer ob);
-    public void detach(Observer ob);
-    public void notifyObservers();
+    void addObserver(Observer ob);
+    void removeObserver(Observer ob);
+    void notifyObservers();
 }

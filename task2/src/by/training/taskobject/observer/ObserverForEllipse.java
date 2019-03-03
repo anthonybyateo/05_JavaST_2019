@@ -1,22 +1,19 @@
-package by.training.taskobject.recorder;
+package by.training.taskobject.observer;
 
-import by.training.taskobject.action.EllipseInfo;
 import by.training.taskobject.entity.Ellipse;
-import by.training.taskobject.observer.Observer;
+import by.training.taskobject.repository.EllipseRepository;
+import by.training.taskobject.specification.FindEllipseSpecification;
+import by.training.taskobject.specification.FindEllipseSpecificationById;
 
 public class ObserverForEllipse implements Observer {
 
     @Override
-    public void update(final Ellipse ellipse) {
+    public void update(final Object ob) {
 
-        EllipseInfo ellipseInfo = new EllipseInfo();
-        EllipseData ellipseData = new EllipseData();
+        Ellipse ellipse = (Ellipse) ob;
+        FindEllipseSpecification specification
+                = new FindEllipseSpecificationById(ellipse.getId());
 
-        double square = ellipseInfo.calcSquare(ellipse);
-        double perimeter = ellipseInfo.calcPerimeter(ellipse);
-
-        ellipseData.setSquare(square);
-        ellipseData.setPerimeter(perimeter);
-
+        EllipseRepository.getInstance().updateEllipse(specification);
     }
 }

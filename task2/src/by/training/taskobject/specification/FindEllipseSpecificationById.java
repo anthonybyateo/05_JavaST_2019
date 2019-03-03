@@ -2,11 +2,11 @@ package by.training.taskobject.specification;
 
 import by.training.taskobject.entity.Ellipse;
 
-public class EllipseSpecificationById implements FindEllipseSpecification {
+public class FindEllipseSpecificationById implements FindEllipseSpecification {
 
     private int id;
 
-    public EllipseSpecificationById(final int idEllipse) {
+    public FindEllipseSpecificationById(final int idEllipse) {
         id = idEllipse;
     }
 

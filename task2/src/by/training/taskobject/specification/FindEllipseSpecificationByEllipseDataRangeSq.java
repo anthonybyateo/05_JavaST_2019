@@ -2,14 +2,15 @@ package by.training.taskobject.specification;
 
 import by.training.taskobject.action.EllipseInfo;
 import by.training.taskobject.entity.Ellipse;
+import by.training.taskobject.recorder.EllipseData;
 
-public class FindEllipseSpecificationByEllipseDataRangeSquare implements
+public class FindEllipseSpecificationByEllipseDataRangeSq implements
         FindEllipseSpecificationByEllipseData {
     private double squareFrom;
     private double squareTo;
 
-    public FindEllipseSpecificationByEllipseDataRangeSquare(final double square1,
-                                                            final double square2) {
+    public FindEllipseSpecificationByEllipseDataRangeSq(final double square1,
+                                                        final double square2) {
         if (checkSquare(square1, square2) >= 0) {
             this.squareFrom = square1;
             this.squareTo = square2;
@@ -21,9 +22,8 @@ public class FindEllipseSpecificationByEllipseDataRangeSquare implements
     }
 
     @Override
-    public boolean specified(final Ellipse ellipse) {
-        EllipseInfo ellipseInfo = new EllipseInfo();
-        double square = ellipseInfo.calcSquare(ellipse);
+    public boolean specified(final EllipseData ellipseData) {
+        double square = ellipseData.getSquare();
         return square >= squareFrom && square <= squareTo;
     }
 

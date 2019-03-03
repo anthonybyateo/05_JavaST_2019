@@ -1,4 +1,10 @@
 package by.training.taskobject.specification;
 
-public interface SortEllipseSpecification {
+import by.training.taskobject.entity.Ellipse;
+
+import java.util.Comparator;
+
+public interface SortEllipseSpecification extends EllipseSpecification {
+
+    Comparator<Ellipse> specifiedComparator();
 }

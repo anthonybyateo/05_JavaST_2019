@@ -8,9 +8,9 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Parse {
+public final class Parser {
 
-    static final Logger LOGGER = LogManager.getLogger(Parse.class);
+    static final Logger LOGGER = LogManager.getLogger(Parser.class);
     private static final String SPLIT = "\\s|;|,";
 
     public List<Double> parseArguments(final List<String> lines) {
@@ -23,10 +23,11 @@ public final class Parse {
                 if (validation.checkDataType(str)) {
                     coordinateList.add(Double.parseDouble(str));
                 } else {
-                    LOGGER.warn("Illegal arguments");
                     try {
                         throw new NotDoubleArgumentException("Illegal arguments");
-                    } catch (NotDoubleArgumentException e) { }
+                    } catch (NotDoubleArgumentException e) {
+                        LOGGER.warn("Illegal arguments");
+                    }
                 }
         return coordinateList;
     }

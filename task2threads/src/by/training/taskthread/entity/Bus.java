@@ -1,70 +1,75 @@
 package by.training.taskthread.entity;
 
-import by.training.taskthread.main.CommonResourse;
+import by.training.taskthread.repository.StopBusRepository;
+import by.training.taskthread.specification.FindStopSpecificationById;
 
+import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Bus implements Callable <Integer> {
 
     private int id;
     private int passenger;
     private Route route;
-    Semaphore sem;
-    ReentrantLock locker;
-    CommonResourse res;
+    private StopBusRepository repository;
+    private Semaphore sem;
 
-    public Bus(final int idBus, final int passengerBus, final Route routeBus,
-               ReentrantLock lock, CommonResourse ress, Semaphore semm) {
+    public Bus(final int idBus, final int passengerBus,
+               final Route routeBus, final Semaphore semaphore,
+               final StopBusRepository stopBusRepository) {
+
         this.id = idBus;
         this.passenger = passengerBus;
         this.route = routeBus;
-        locker = lock;
-        res = ress;
-        sem = semm;
+        this.sem = semaphore;
+        this.repository = stopBusRepository;
+
     }
 
     @Override
     public Integer call() throws Exception {
-       // Stop stop = new Stop(0, 0, "0");
 
+        int k = 1;
+        while (k < 5) {
 
+            System.out.println("КРУГ №" + k);
 
-        try {
-
-           for (int i = 0; i < route.size(); i++) {
+            for (int i = 0; i < route.size(); i++) {
 
                sem.acquire();
 
-               //locker.lock();
-               System.out.println(route.get(i).getName() + " Bus " + id);
-               route.get(i).setPassenger(0);
-                for (int j = 1; j < 5; j++) {
-                    System.out.println(route.get(i).getPassenger());
-                    route.get(i).setPassenger(j);
-                    TimeUnit.MILLISECONDS.sleep(1000);
-                }
+               FindStopSpecificationById specification =
+                       new FindStopSpecificationById(route.get(i));
+
+               String name = repository.query(specification).get(0).getName();
+               Stop stop = repository.query(specification).get(0);
+
+               Random rnd = new Random();
+
+               stop.setPassenger(rnd.nextInt(20));
+               int outPassenger = rnd.nextInt(passenger + 1);
+               this.passenger -= outPassenger;
+               int inPassenger = rnd.nextInt(10);
+               this.passenger += inPassenger;
+
+               System.out.println("На остановку " + name
+                       + " прибыл автобус №" + id + ".\nИз него вышло "
+                       + outPassenger + " пассажиров и зашло " + inPassenger
+                       + ".\nТеперь пассажиров в автобусе " + passenger
+                       + ".\n");
+
+               TimeUnit.MILLISECONDS.sleep(1000);
                sem.release();
-               TimeUnit.MILLISECONDS.sleep(10000);
-               //locker.unlock();
 
+               TimeUnit.MILLISECONDS.sleep(3000);
+           }
 
-            }
-        } finally {
-
-
+           k++;
         }
 
-
-
-
-
-
-
-
-        return 0;
+        return this.passenger;
     }
 }
 

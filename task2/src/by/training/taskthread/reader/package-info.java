@@ -1,1 +1,0 @@
-package by.training.taskthread.reader;

@@ -1,11 +1,11 @@
 package by.training.taskinfohandling.entity;
 
 
-public class Сharacter implements TextComponent {
+public class СharacterLeaf implements TextComponent {
 
     private char ch;
 
-    public Сharacter(final char aChar) {
+    public СharacterLeaf(final char aChar) {
         this.ch = aChar;
     }
 

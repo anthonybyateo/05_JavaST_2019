@@ -3,20 +3,21 @@ package by.training.taskinfohandling.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Composite implements TextComponent {
+public class TextComposite implements Component {
 
-    private level;
-    private ArrayList<TextComponent> components;
+    private Level level;
+    private ArrayList<Component> components;
 
-    public Composite() {
-        components = new ArrayList<TextComponent>();
+    public TextComposite(final Level levelText) {
+        this.level = levelText;
+        components = new ArrayList<Component>();
     }
 
-    public void add(TextComponent component) {
+    public void add(Component component) {
         components.add(component);
     }
 
-    public void remove(TextComponent component) {
+    public void remove(Component component) {
         components.remove(component);
     }
 
@@ -29,9 +30,11 @@ public class Composite implements TextComponent {
     public String getValue() {
         List<Character> chars = new ArrayList<>();
 
-        for (TextComponent component : components) {
+        for (Component component : components) {
             chars.addAll(component.getValue());
         }
         return chars;
     }
+
+
 }

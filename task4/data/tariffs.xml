@@ -1,1 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<tariffs xmlns="http://www.training.by"
+         xmlns:tns="http://www.w3.org/2001/XMLSchema-instance"
+         tns:schemaLocation="http://www.training.by tariffs.xsd">
+
+    <smartphone login="super" tarrifing="oneminute">
+        <name>Супер</name>
+        <operator_name>МТС</operator_name>
+        <payroll>10.5</payroll>
+        <date>
+            <start>2019-03-22</start>
+            <finish>2019-06-22</finish>
+        </date>
+        <call_prices>
+            <inside>0.009</inside>
+            <outside>0.021</outside>
+            <landline>0.031</landline>
+            <sms>0.002</sms>
+        </call_prices>
+        <free_minute>100</free_minute>
+        <internet_price>0.01</internet_price>
+        <free_mgb>100</free_mgb>
+        <parameters>
+            <favorite_number>2</favorite_number>
+            <connection_fee>2.97</connection_fee>
+        </parameters>
+    </smartphone>
+
+    <internet login="bit">
+        <name>Бит</name>
+        <operator_name>МТС</operator_name>
+        <payroll>15.5</payroll>
+        <date>
+            <start>2019-04-25</start>
+            <finish>2019-07-25</finish>
+        </date>
+        <internet_price>0.01</internet_price>
+        <free_mgb>0.01</free_mgb>
+    </internet>
+
+    <only_calls login="easySay" tarrifing="oneminute">
+        <name>Легко сказать</name>
+        <operator_name>МТС</operator_name>
+        <payroll>15.5</payroll>
+        <date>
+            <start>2019-04-25</start>
+            <finish>2019-07-25</finish>
+        </date>
+        <call_prices>
+            <inside>0.009</inside>
+            <outside>0.021</outside>
+            <landline>0.031</landline>
+            <sms>0.002</sms>
+        </call_prices>
+        <free_minute>150</free_minute>
+        <parameters>
+            <favorite_number>2</favorite_number>
+            <connection_fee>2.97</connection_fee>
+        </parameters>
+    </only_calls>
+
+</tariffs>

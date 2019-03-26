@@ -3,38 +3,29 @@ package by.training.taskinfohandling.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextComposite implements Component {
+public abstract class Composite implements TextComponent {
 
-    private Level level;
-    private ArrayList<Component> components;
+    protected String text;
+    protected List<TextComponent> childText;
 
-    public TextComposite(final Level levelText) {
-        this.level = levelText;
-        components = new ArrayList<Component>();
+    public Composite() {
+        childText = new ArrayList<>();
     }
 
-    public void add(Component component) {
-        components.add(component);
+    public void add(TextComponent textComponent) {
+        childText.add(textComponent);
     }
 
-    public void remove(Component component) {
-        components.remove(component);
+    public void remove(TextComponent textComponent) {
+        childText.remove(textComponent);
     }
 
-    public Object getChild(int index) {
+    public TextComponent getChild(int index) {
 
-        return components.get(index);
+        return childText.get(index);
     }
 
-    @Override
-    public String getValue() {
-        List<Character> chars = new ArrayList<>();
-
-        for (Component component : components) {
-            chars.addAll(component.getValue());
-        }
-        return chars;
+    public void setText(final String textComponent) {
+        this.text = textComponent;
     }
-
-
 }

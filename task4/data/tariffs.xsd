@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
-        targetNamespace="http://www.training.by"
-        xmlns:tns="http://www.training.by"
+        targetNamespace="http://www.training.by/tariffs"
+        xmlns:tns="http://www.training.by/tariffs"
         elementFormDefault="qualified">
 
     <element name="tariffs">
@@ -14,20 +14,20 @@
         </complexType>
     </element>
 
-    <element name="tariff" type="tns:TariffType" abstract="true"></element>
-    <element name="smartphone" type="tns:Smartphone" substitutionGroup="tns:tariff"></element>
-    <element name="internet" type="tns:Internet" substitutionGroup="tns:tariff"></element>
-    <element name="only_calls" type="tns:Only_calls" substitutionGroup="tns:tariff"></element>
+    <element name="tariff" type="tns:TariffType" abstract="true" />
+    <element name="smartphone" type="tns:Smartphone" substitutionGroup="tns:tariff" />
+    <element name="internet" type="tns:Internet" substitutionGroup="tns:tariff" />
+    <element name="only_calls" type="tns:Only_calls" substitutionGroup="tns:tariff" />
 
     <complexType name="TariffType">
         <sequence>
             <element name="name" type="string" />
             <element name="operator_name" type="string" />
-            <element name="payroll" type="tns:nonNegativedecimal" />
+            <element name="payroll" type="tns:NonNegativedecimal" />
             <element name="date" type="tns:Date" />
         </sequence>
 
-        <attribute name="login" type="tns:Login" use="required" />
+        <attribute name="idnumber" type="tns:IdNumber" use="required" />
     </complexType>
 
     <complexType name="Smartphone">
@@ -36,8 +36,8 @@
                 <sequence>
                     <element name="call_prices" type="tns:Call_prices" />
                     <element name="free_minute" type="nonNegativeInteger" />
-                    <element name="internet_price" type="tns:nonNegativedecimal" />
-                    <element name="free_mgb" type="tns:nonNegativedecimal" />
+                    <element name="internet_price" type="tns:NonNegativedecimal" />
+                    <element name="free_mgb" type="tns:NonNegativedecimal" />
                     <element name="parameters" type="tns:Parameters" />
                 </sequence>
 
@@ -50,8 +50,8 @@
         <complexContent>
             <extension base="tns:TariffType">
                 <sequence>
-                    <element name="internet_price" type="tns:nonNegativedecimal" />
-                    <element name="free_mgb" type="tns:nonNegativedecimal" />
+                    <element name="internet_price" type="tns:NonNegativedecimal" />
+                    <element name="free_mgb" type="tns:NonNegativedecimal" />
                 </sequence>
             </extension>
         </complexContent>
@@ -71,25 +71,26 @@
         </complexContent>
     </complexType>
 
-    <simpleType name="nonNegativedecimal">
+    <simpleType name="NonNegativedecimal">
         <restriction base="decimal">
             <minInclusive value="0"/>
+            <maxInclusive value="200"/>
         </restriction>
     </simpleType>
 
     <complexType name="Call_prices">
-        <sequence>
-            <element name="inside" type="tns:nonNegativedecimal" />
-            <element name="outside" type="tns:nonNegativedecimal" />
-            <element name="landline" type="tns:nonNegativedecimal" />
-            <element name="sms" type="tns:nonNegativedecimal" />
-        </sequence>
+        <all>
+            <element name="inside" type="tns:NonNegativedecimal" />
+            <element name="outside" type="tns:NonNegativedecimal" />
+            <element name="landline" type="tns:NonNegativedecimal" />
+            <element name="sms" type="tns:NonNegativedecimal" />
+        </all>
     </complexType>
 
     <complexType name="Parameters">
         <sequence>
             <element name="favorite_number" type="nonNegativeInteger" />
-            <element name="connection_fee" type="tns:nonNegativedecimal" />
+            <element name="connection_fee" type="tns:NonNegativedecimal" />
         </sequence>
     </complexType>
 
@@ -100,16 +101,16 @@
         </sequence>
     </complexType>
 
-    <simpleType name="Login">
+    <simpleType name="IdNumber">
         <restriction base="ID">
-            <pattern value="[a-zA-Z0-9]{3,20}"/>
+            <pattern value="[a-zA-Z]{1,20}"/>
         </restriction>
     </simpleType>
 
     <simpleType name="Tarrifing">
         <restriction base="string">
-            <enumeration value="oneminute"></enumeration>
-            <enumeration value="12seconds"></enumeration>
+            <enumeration value="oneminute" />
+            <enumeration value="12seconds" />
         </restriction>
     </simpleType>
 

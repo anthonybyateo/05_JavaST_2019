@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tariffs xmlns="http://www.training.by"
+<tariffs xmlns="http://www.training.by/tariffs"
          xmlns:tns="http://www.w3.org/2001/XMLSchema-instance"
-         tns:schemaLocation="http://www.training.by tariffs.xsd">
+         tns:schemaLocation="http://www.training.by/tariffs tariffs.xsd">
 
-    <smartphone login="super" tarrifing="oneminute">
+    <smartphone idnumber="super" tarrifing="oneminute">
         <name>Супер</name>
         <operator_name>МТС</operator_name>
         <payroll>10.5</payroll>
@@ -26,7 +26,7 @@
         </parameters>
     </smartphone>
 
-    <internet login="bit">
+    <internet idnumber="bit">
         <name>Бит</name>
         <operator_name>МТС</operator_name>
         <payroll>15.5</payroll>
@@ -38,7 +38,7 @@
         <free_mgb>0.01</free_mgb>
     </internet>
 
-    <only_calls login="easySay" tarrifing="oneminute">
+    <only_calls idnumber="easySay" tarrifing="oneminute">
         <name>Легко сказать</name>
         <operator_name>МТС</operator_name>
         <payroll>15.5</payroll>

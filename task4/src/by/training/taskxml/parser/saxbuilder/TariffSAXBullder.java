@@ -1,6 +1,7 @@
-package by.training.taskXML.parser;
+package by.training.taskxml.parser.saxbuilder;
 
-import by.training.taskXML.entity.tariffs.TariffType;
+import by.training.taskxml.entity.tariffs.TariffType;
+import by.training.taskxml.parser.BaseBuilder;
 
 public class SAXBullder extends BaseBuilder {
     @Override

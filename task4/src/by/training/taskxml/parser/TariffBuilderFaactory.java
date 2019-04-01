@@ -1,4 +1,4 @@
 package by.training.taskxml.parser;
 
-public interface BaseBuilder {
+public class TariffBuilderFaactory {
 }

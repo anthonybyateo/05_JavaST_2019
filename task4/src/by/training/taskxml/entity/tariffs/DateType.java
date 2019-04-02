@@ -6,7 +6,7 @@
 //
 
 
-package by.training.tariffs;
+package by.training.taskxml.entity.tariffs;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -45,20 +45,20 @@ public class Date {
 
     @XmlElement(required = true)
     @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar start;
+    protected Date start;
     @XmlElement(required = true)
     @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar finish;
+    protected Date finish;
 
     /**
      * Gets the value of the start property.
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public XMLGregorianCalendar getStart() {
+    public Date getStart() {
         return start;
     }
 
@@ -67,10 +67,10 @@ public class Date {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public void setStart(XMLGregorianCalendar value) {
+    public void setStart(Date value) {
         this.start = value;
     }
 
@@ -79,10 +79,10 @@ public class Date {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public XMLGregorianCalendar getFinish() {
+    public Date getFinish() {
         return finish;
     }
 
@@ -91,11 +91,18 @@ public class Date {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public void setFinish(XMLGregorianCalendar value) {
+    public void setFinish(Date value) {
         this.finish = value;
     }
 
+    @Override
+    public String toString() {
+        return "Date{" +
+                "start=" + start +
+                ", finish=" + finish +
+                '}';
+    }
 }

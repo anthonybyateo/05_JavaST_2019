@@ -1,8 +1,6 @@
 package by.training.taskxml.parser.dombuilder;
 
-import by.training.taskxml.entity.tariffs.CallPrices;
-import by.training.taskxml.entity.tariffs.Smartphone;
-import by.training.taskxml.entity.tariffs.TariffType;
+import by.training.taskxml.entity.tariffs.*;
 import by.training.taskxml.parser.AbstractTariffBuilder;
 import by.training.taskxml.parser.TariffEnum;
 import org.w3c.dom.Document;
@@ -15,6 +13,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TariffDOMBuilder extends AbstractTariffBuilder {
 
@@ -32,6 +33,14 @@ public class TariffDOMBuilder extends AbstractTariffBuilder {
         }
     }
 
+    private void addTariff(final NodeList tariffList) {
+        for (int i = 0; i < tariffList.getLength(); i++) {
+            Element tariffElement = (Element) tariffList.item(i);
+            TariffType tariffType = buildTariff(tariffElement);
+            tariffs.add(tariffType);
+        }
+    }
+
     @Override
     public void buildSetTariffType(String fileName) {
         Document doc = null;
@@ -42,21 +51,9 @@ public class TariffDOMBuilder extends AbstractTariffBuilder {
             NodeList tariffList2 = root.getElementsByTagName("internet");
             NodeList tariffList3 = root.getElementsByTagName("only_calls");
 
-            for (int i = 0; i < tariffList1.getLength(); i++) {
-                Element tariffElement = (Element) tariffList1.item(i);
-                TariffType tariffType = buildTariff(tariffElement);
-                tariffs.add(tariffType);
-            }
-            for (int i = 0; i < tariffList2.getLength(); i++) {
-                Element tariffElement = (Element) tariffList2.item(i);
-                TariffType tariffType = buildTariff(tariffElement);
-                tariffs.add(tariffType);
-            }
-            for (int i = 0; i < tariffList3.getLength(); i++) {
-                Element tariffElement = (Element) tariffList3.item(i);
-                TariffType tariffType = buildTariff(tariffElement);
-                tariffs.add(tariffType);
-            }
+            addTariff(tariffList1);
+            addTariff(tariffList2);
+            addTariff(tariffList3);
 
         } catch (SAXException e) {
             //TODO log
@@ -67,36 +64,165 @@ public class TariffDOMBuilder extends AbstractTariffBuilder {
         }
     }
 
+    private void initTariff(final Element tariffElement,
+                       final TariffType tariff) {
+
+        tariff.setIdnumber(tariffElement
+                .getAttribute(TariffEnum.IDNUMBER.getValue()));
+
+        tariff.setName(getElementTextContent(tariffElement,
+                TariffEnum.NAME.getValue()));
+
+        tariff.setOperatorName(getElementTextContent(tariffElement,
+                TariffEnum.OPERATOR_NAME.getValue()));
+
+        Double payroll = Double.parseDouble(getElementTextContent(
+                tariffElement, TariffEnum.PAYROLL.getValue()));
+        tariff.setPayroll(payroll);
+
+        DateType dateType = tariff.getDateType();
+        Element dateTypeElement = (Element) tariffElement.
+                getElementsByTagName(TariffEnum.DATE.getValue())
+                .item(0);
+        try {
+            Date startDate = new SimpleDateFormat("yyyy-MM-dd")
+                    .parse(getElementTextContent(dateTypeElement,
+                            TariffEnum.START.getValue()));
+            dateType.setStart(startDate);
+        } catch (ParseException e) {
+            //TODO log
+            e.printStackTrace();
+        }
+        try {
+            Date finishDate = new SimpleDateFormat("yyyy-MM-dd")
+                    .parse(getElementTextContent(dateTypeElement,
+                            TariffEnum.FINISH.getValue()));
+            dateType.setFinish(finishDate);
+        } catch (ParseException e) {
+            //TODO log
+            e.printStackTrace();
+        }
+    }
+
+    private void initSmartphone(final Element tariffElement,
+                                final TariffType tariff) {
+        initTariff(tariffElement, tariff);
+
+        ( (Smartphone) tariff).setTarrifing(tariffElement
+                .getAttribute(TariffEnum.TARIFFING.getValue()));
+
+        CallPrices callPrices = ( (Smartphone) tariff).getCallPrices();
+        Element callPricesElement = (Element) tariffElement.
+                getElementsByTagName(TariffEnum.CALL_PRICES.getValue())
+                .item(0);
+        Double inside = Double.parseDouble(getElementTextContent(
+                callPricesElement, TariffEnum.INSIDE.getValue()));
+        callPrices.setInside(inside);
+        Double outside = Double.parseDouble(getElementTextContent(
+                callPricesElement, TariffEnum.OUTSIDE.getValue()));
+        callPrices.setOutside(outside);
+        Double landline = Double.parseDouble(getElementTextContent(
+                callPricesElement, TariffEnum.LANDLINE.getValue()));
+        callPrices.setLandline(landline);
+        Double sms = Double.parseDouble(getElementTextContent(
+                callPricesElement, TariffEnum.SMS.getValue()));
+        callPrices.setSms(sms);
+
+        Parameters parameters = ( (Smartphone) tariff).getParameters();
+        Element parametersElement = (Element) tariffElement.
+                getElementsByTagName(TariffEnum.PARAMETERS.getValue())
+                .item(0);
+        Integer favoriteNumber = Integer.parseInt(getElementTextContent(
+                parametersElement, TariffEnum.FAVORITE_NUMBER.getValue()));
+        parameters.setFavoriteNumber(favoriteNumber);
+        Double connectionFee = Double.parseDouble(getElementTextContent(
+                parametersElement, TariffEnum.CONNECTION_FEE.getValue()));
+        parameters.setConnectionFee(connectionFee);
+
+        Integer freeMinute = Integer.parseInt(getElementTextContent(
+                tariffElement, TariffEnum.FREE_MINUTE.getValue()));
+        ((Smartphone) tariff).setFreeMinute(freeMinute);
+
+        Double internetPrice = Double.parseDouble(getElementTextContent(
+                tariffElement, TariffEnum.INTERNET_PRICE.getValue()));
+        ((Smartphone) tariff).setInternetPrice(internetPrice);
+
+        Double freeMgb = Double.parseDouble(getElementTextContent(
+                tariffElement, TariffEnum.FREE_MGB.getValue()));
+        ((Smartphone) tariff).setFreeMgb(freeMgb);
+    }
+
+    private void initInternet(final Element tariffElement,
+                                final TariffType tariff) {
+        initTariff(tariffElement, tariff);
+
+        Double internetPrice = Double.parseDouble(getElementTextContent(
+                tariffElement, TariffEnum.INTERNET_PRICE.getValue()));
+        ((Internet) tariff).setInternetPrice(internetPrice);
+
+        Double freeMgb = Double.parseDouble(getElementTextContent(
+                tariffElement, TariffEnum.FREE_MGB.getValue()));
+        ((Internet) tariff).setFreeMgb(freeMgb);
+    }
+
+    private void initOnlyCalls(final Element tariffElement,
+                                final TariffType tariff) {
+        initTariff(tariffElement, tariff);
+
+        ( (OnlyCalls) tariff).setTarrifing(tariffElement
+                .getAttribute(TariffEnum.TARIFFING.getValue()));
+
+        CallPrices callPrices = ( (OnlyCalls) tariff).getCallPrices();
+        Element callPricesElement = (Element) tariffElement.
+                getElementsByTagName(TariffEnum.CALL_PRICES.getValue())
+                .item(0);
+        Double inside = Double.parseDouble(getElementTextContent(
+                callPricesElement, TariffEnum.INSIDE.getValue()));
+        callPrices.setInside(inside);
+        Double outside = Double.parseDouble(getElementTextContent(
+                callPricesElement, TariffEnum.OUTSIDE.getValue()));
+        callPrices.setOutside(outside);
+        Double landline = Double.parseDouble(getElementTextContent(
+                callPricesElement, TariffEnum.LANDLINE.getValue()));
+        callPrices.setLandline(landline);
+        Double sms = Double.parseDouble(getElementTextContent(
+                callPricesElement, TariffEnum.SMS.getValue()));
+        callPrices.setSms(sms);
+
+        Parameters parameters = ( (OnlyCalls) tariff).getParameters();
+        Element parametersElement = (Element) tariffElement.
+                getElementsByTagName(TariffEnum.PARAMETERS.getValue())
+                .item(0);
+        Integer favoriteNumber = Integer.parseInt(getElementTextContent(
+                parametersElement, TariffEnum.FAVORITE_NUMBER.getValue()));
+        parameters.setFavoriteNumber(favoriteNumber);
+        Double connectionFee = Double.parseDouble(getElementTextContent(
+                parametersElement, TariffEnum.CONNECTION_FEE.getValue()));
+        parameters.setConnectionFee(connectionFee);
+
+        Integer freeMinute = Integer.parseInt(getElementTextContent(
+                tariffElement, TariffEnum.FREE_MINUTE.getValue()));
+        ((OnlyCalls) tariff).setFreeMinute(freeMinute);
+
+    }
+
     private TariffType buildTariff(Element tariffElement) {
         TariffType tariff = new TariffType();
 
-        if ("smartphone".equals(tariffElement.getTagName())) {
+        if (TariffEnum.SMARTPHONE.getValue().equals(tariffElement.getTagName())) {
             tariff = new Smartphone();
-            tariff.setIdnumber(tariffElement.getAttribute("idnumber"));
-            ( (Smartphone) tariff).setTarrifing(tariffElement.getAttribute("tarrifing"));
-            tariff.setName(getElementTextContent(tariffElement,
-                    "name"));
-            tariff.setName(getElementTextContent(tariffElement,
-                    "operator_name"));
-            Double payroll = Double.parseDouble(getElementTextContent(
-                    tariffElement, "payroll"));
-            tariff.setPayroll(payroll);
-            //Smartphone.DateType dateType = tariff.getDateType();
-            CallPrices callPrices = ( (Smartphone) tariff).getCallPrices();
-            Element callPricesElement = (Element) tariffElement.
-                    getElementsByTagName("call_prices").item(0);
-            Double inside = Double.parseDouble(getElementTextContent(
-                    callPricesElement, "inside"));
-            callPrices.setInside(inside);
-            Double outside = Double.parseDouble(getElementTextContent(
-                    callPricesElement, "outside"));
-            callPrices.setOutside(outside);
-            Double landline = Double.parseDouble(getElementTextContent(
-                    callPricesElement, TariffEnum.LANDLINE.getValue()));
-            callPrices.setLandline(landline);
-            Double sms = Double.parseDouble(getElementTextContent(
-                    callPricesElement, "sms"));
-            callPrices.setSms(sms);
+            initSmartphone(tariffElement, tariff);
+
+        }
+        if (TariffEnum.INTERNET.getValue().equals(tariffElement.getTagName())) {
+            tariff = new Internet();
+            initInternet(tariffElement, tariff);
+
+        }
+        if (TariffEnum.ONLY_CALLS.getValue().equals(tariffElement.getTagName())) {
+            tariff = new OnlyCalls();
+            initOnlyCalls(tariffElement, tariff);
+
         }
 
         return tariff;
@@ -106,7 +232,6 @@ public class TariffDOMBuilder extends AbstractTariffBuilder {
                                                 String elementName) {
         NodeList nList = element.getElementsByTagName(elementName);
         Node node = nList.item(0);
-        String text = node.getTextContent();
-        return text;
+        return node.getTextContent();
     }
 }

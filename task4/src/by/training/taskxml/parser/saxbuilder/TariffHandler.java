@@ -23,7 +23,7 @@ public class TariffHandler extends DefaultHandler {
     private EnumSet<TariffEnum> withText;
 
     public TariffHandler() {
-        tariffs = new HashSet<TariffType>();
+        tariffs = new HashSet<>();
         withText = EnumSet.range(TariffEnum.IDNUMBER,
                 TariffEnum.CONNECTION_FEE);
     }
@@ -35,18 +35,18 @@ public class TariffHandler extends DefaultHandler {
     @Override
     public void startElement(final String url, final String localName,
                              final String qName, final Attributes attrs) {
-        if ("smartphone".equals(localName)) {
+        if (TariffEnum.SMARTPHONE.getValue().equals(localName)) {
             current = new Smartphone();
             tariffs.add(current);
             current.setIdnumber(attrs.getValue(0));
             if (attrs.getLength() == 2) {
                 ((Smartphone) current).setTarrifing(attrs.getValue(1));
             }
-        } else if ("internet".equals(localName)) {
+        } else if (TariffEnum.INTERNET.getValue().equals(localName)) {
             current = new Internet();
             tariffs.add(current);
             current.setIdnumber(attrs.getValue(0));
-        } else if ("only_calls".equals(localName)) {
+        } else if (TariffEnum.ONLY_CALLS.getValue().equals(localName)) {
             current = new OnlyCalls();
             tariffs.add(current);
             current.setIdnumber(attrs.getValue(0));
@@ -64,7 +64,9 @@ public class TariffHandler extends DefaultHandler {
     @Override
     public void endElement(final String url, final String localName,
                            final String qName) {
-        if ("smartphone".equals(localName)) {
+        if (TariffEnum.SMARTPHONE.getValue().equals(localName)
+                || TariffEnum.INTERNET.getValue().equals(localName)
+                || TariffEnum.ONLY_CALLS.getValue().equals(localName)) {
             tariffs.add(current);
         }
     }

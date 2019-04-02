@@ -24,7 +24,7 @@ public class Main {
 
 
         System.out.println(saxBuilder.getTariffs());
-        //System.out.println(domBuilder.getTariffs());
-        //System.out.println(staxBuilder.getTariffs());
+        System.out.println(domBuilder.getTariffs());
+        System.out.println(staxBuilder.getTariffs());
     }
 }

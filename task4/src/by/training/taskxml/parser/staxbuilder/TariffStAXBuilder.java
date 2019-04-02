@@ -12,6 +12,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TariffStAXBuilder extends AbstractTariffBuilder {
 
@@ -64,12 +67,103 @@ public class TariffStAXBuilder extends AbstractTariffBuilder {
         }
     }
 
+    private void initTariff(String name, TariffType tariff,
+                            XMLStreamReader reader) throws XMLStreamException {
+                switch (TariffEnum.valueOf(name.toUpperCase())) {
+                    case NAME:
+                        tariff.setName(getXMLText(reader));
+                        break;
+                    case OPERATOR_NAME:
+                        tariff.setOperatorName(getXMLText(reader));
+                        break;
+                    case PAYROLL:
+                        name = getXMLText(reader);
+                        tariff.setPayroll(Double.parseDouble(name));
+                        break;
+                    case DATE:
+                        tariff.setDateType(getXMLDate(reader));
+                        break;
+                }
+    }
+
     private TariffType buildTariff(XMLStreamReader reader) throws
             XMLStreamException {
         TariffType tariff = new TariffType();
-        if ("internet".equals(reader.getLocalName())) {
+        if (TariffEnum.INTERNET.getValue().equals(reader.getLocalName())) {
+            tariff = new Internet();
+            tariff.setIdnumber(reader.getAttributeValue(null,
+                    TariffEnum.IDNUMBER.getValue()));
+            String name;
+            while (reader.hasNext()) {
+                int type = reader.next();
+                switch (type) {
+                    case XMLStreamConstants.START_ELEMENT:
+                        name = reader.getLocalName();
+                        initTariff(name, tariff, reader);
+                        switch (TariffEnum.valueOf(name.toUpperCase())) {
+                            case INTERNET_PRICE:
+                                name = getXMLText(reader);
+                                ((Internet) tariff).setInternetPrice(Double
+                                        .parseDouble(name));
+                                break;
+                            case FREE_MGB:
+                                name = getXMLText(reader);
+                                ((Internet) tariff).setFreeMgb(Double
+                                        .parseDouble(name));
+                                break;
+                        }
+                        break;
+                    case XMLStreamConstants.END_ELEMENT:
+                        name = reader.getLocalName();
+                        if (TariffEnum.valueOf(name.toUpperCase())
+                                == TariffEnum.INTERNET) {
+                            return tariff;
+                        }
+                        break;
+                }
+            }
             return tariff;
-        } else if ("only_calls".equals(reader.getLocalName())) {
+        } else if (TariffEnum.ONLY_CALLS.getValue().equals(reader.getLocalName())) {
+            tariff = new OnlyCalls();
+            tariff.setIdnumber(reader.getAttributeValue(null,
+                    TariffEnum.IDNUMBER.getValue()));
+            if (reader.getAttributeCount() == 2) {
+                ((OnlyCalls) tariff).setTarrifing(reader.
+                        getAttributeValue(null,
+                                TariffEnum.TARIFFING.getValue()));
+            }
+            String name;
+            while (reader.hasNext()) {
+                int type = reader.next();
+                switch (type) {
+                    case XMLStreamConstants.START_ELEMENT:
+                        name = reader.getLocalName();
+                        initTariff(name, tariff, reader);
+                        switch (TariffEnum.valueOf(name.toUpperCase())) {
+                            case CALL_PRICES:
+                                ((OnlyCalls) tariff)
+                                        .setCallPrices(getXMLCallPrices(reader));
+                                break;
+                            case FREE_MINUTE:
+                                name = getXMLText(reader);
+                                ((OnlyCalls) tariff).setFreeMinute(Integer
+                                        .parseInt(name));
+                                break;
+                            case PARAMETERS:
+                                ((OnlyCalls) tariff)
+                                        .setParameters(getXMLParameters(reader));
+                                break;
+                        }
+                        break;
+                    case XMLStreamConstants.END_ELEMENT:
+                        name = reader.getLocalName();
+                        if (TariffEnum.valueOf(name.toUpperCase())
+                                == TariffEnum.ONLY_CALLS) {
+                            return tariff;
+                        }
+                        break;
+                }
+            }
             return tariff;
         } else if ("smartphone".equals(reader.getLocalName())) {
             tariff = new Smartphone();
@@ -86,28 +180,15 @@ public class TariffStAXBuilder extends AbstractTariffBuilder {
                 switch (type) {
                     case XMLStreamConstants.START_ELEMENT:
                         name = reader.getLocalName();
+                        initTariff(name, tariff, reader);
                         switch (TariffEnum.valueOf(name.toUpperCase())) {
-                            case NAME:
-                                tariff.setName(getXMLText(reader));
-                                break;
-                            case OPERATOR_NAME:
-                                tariff.setOperatorName(getXMLText(reader));
-                                break;
-                            case PAYROLL:
-                                name = getXMLText(reader);
-                                tariff.setPayroll(Double.parseDouble(name));
-                                break;
-                            case DATE:
-                                ((Smartphone) tariff)
-                                        .setDateType(getXMLDate(reader));
-                                break;
                             case CALL_PRICES:
                                 ((Smartphone) tariff)
                                         .setCallPrices(getXMLCallPrices(reader));
                                 break;
                             case FREE_MINUTE:
                                 name = getXMLText(reader);
-                                ((Smartphone) tariff).setFreeMgb(Integer
+                                ((Smartphone) tariff).setFreeMinute(Integer
                                         .parseInt(name));
                                 break;
                             case INTERNET_PRICE:
@@ -179,7 +260,7 @@ public class TariffStAXBuilder extends AbstractTariffBuilder {
             }
         }
         //TODO log
-        throw new XMLStreamException("Unknown element in tag Address");
+        throw new XMLStreamException("Unknown element in tag call_prices");
     }
 
     private Parameters getXMLParameters(XMLStreamReader reader)
@@ -213,7 +294,7 @@ public class TariffStAXBuilder extends AbstractTariffBuilder {
             }
         }
         //TODO log
-        throw new XMLStreamException("Unknown element in tag Address");
+        throw new XMLStreamException("Unknown element in tag Parameters");
     }
 
     private DateType getXMLDate(XMLStreamReader reader)
@@ -229,11 +310,27 @@ public class TariffStAXBuilder extends AbstractTariffBuilder {
                     switch (TariffEnum.valueOf(name.toUpperCase())) {
                         case START:
                             name = getXMLText(reader);
-                            //parameters.setFavoriteNumber(Integer.parseInt(name));
+                            try {
+                                Date startDate =
+                                        new SimpleDateFormat("yyyy-MM-dd")
+                                                .parse(name);
+                                dateType.setStart(startDate);
+                            } catch (ParseException e) {
+                                //TODO log
+                                e.printStackTrace();
+                            }
                             break;
                         case FINISH:
                             name = getXMLText(reader);
-                            //parameters.setConnectionFee(Double.parseDouble(name));
+                            try {
+                                Date finishDate =
+                                        new SimpleDateFormat("yyyy-MM-dd")
+                                        .parse(name);
+                                dateType.setFinish(finishDate);
+                            } catch (ParseException e) {
+                                //TODO log
+                                e.printStackTrace();
+                            }
                             break;
                     }
                     break;
@@ -247,7 +344,7 @@ public class TariffStAXBuilder extends AbstractTariffBuilder {
             }
         }
         //TODO log
-        throw new XMLStreamException("Unknown element in tag Address");
+        throw new XMLStreamException("Unknown element in tag Date");
     }
 
     private String getXMLText(XMLStreamReader reader) throws XMLStreamException {

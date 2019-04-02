@@ -58,7 +58,7 @@
             <finish>2019-07-25</finish>
         </date>
         <internet_price>0.01</internet_price>
-        <free_mgb>0.01</free_mgb>
+        <free_mgb>10000</free_mgb>
     </internet>
 
     <only_calls idnumber="easySay" tarrifing="oneminute">

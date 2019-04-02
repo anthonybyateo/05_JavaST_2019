@@ -52,6 +52,11 @@ public class DateType {
     @XmlSchemaType(name = "dateType")
     protected Date finish;
 
+    public DateType() {
+        start = new Date();
+        finish = new Date();
+    }
+
     /**
      * Gets the value of the start property.
      * 

@@ -6,7 +6,7 @@
 //
 
 
-package by.training.tariffs;
+package by.training.taskxml.entity.tariffs;
 
 import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -44,23 +44,23 @@ import javax.xml.bind.annotation.XmlType;
 public class CallPrices {
 
     @XmlElement(required = true)
-    protected BigDecimal inside;
+    protected double inside;
     @XmlElement(required = true)
-    protected BigDecimal outside;
+    protected double outside;
     @XmlElement(required = true)
-    protected BigDecimal landline;
+    protected double landline;
     @XmlElement(required = true)
-    protected BigDecimal sms;
+    protected double sms;
 
     /**
      * Gets the value of the inside property.
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link double }
      *     
      */
-    public BigDecimal getInside() {
+    public double getInside() {
         return inside;
     }
 
@@ -72,7 +72,7 @@ public class CallPrices {
      *     {@link BigDecimal }
      *     
      */
-    public void setInside(BigDecimal value) {
+    public void setInside(double value) {
         this.inside = value;
     }
 
@@ -81,10 +81,10 @@ public class CallPrices {
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link double }
      *     
      */
-    public BigDecimal getOutside() {
+    public double getOutside() {
         return outside;
     }
 
@@ -93,10 +93,10 @@ public class CallPrices {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link double }
      *     
      */
-    public void setOutside(BigDecimal value) {
+    public void setOutside(double value) {
         this.outside = value;
     }
 
@@ -105,10 +105,10 @@ public class CallPrices {
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link double }
      *     
      */
-    public BigDecimal getLandline() {
+    public double getLandline() {
         return landline;
     }
 
@@ -117,10 +117,10 @@ public class CallPrices {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link double }
      *     
      */
-    public void setLandline(BigDecimal value) {
+    public void setLandline(double value) {
         this.landline = value;
     }
 
@@ -129,10 +129,10 @@ public class CallPrices {
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link double }
      *     
      */
-    public BigDecimal getSms() {
+    public double getSms() {
         return sms;
     }
 
@@ -141,11 +141,20 @@ public class CallPrices {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link double }
      *     
      */
-    public void setSms(BigDecimal value) {
+    public void setSms(double value) {
         this.sms = value;
     }
 
+    @Override
+    public String toString() {
+        return "CallPrices{" +
+                "inside=" + inside +
+                ", outside=" + outside +
+                ", landline=" + landline +
+                ", sms=" + sms +
+                '}';
+    }
 }

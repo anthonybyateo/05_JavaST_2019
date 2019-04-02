@@ -1,9 +1,8 @@
-package by.training.taskxml.parser.saxbuilder;
+package by.training.taskxml.parser;
 
 public enum TariffEnum {
 
     TARIFFS("tariffs"),
-    FINISH("finish"),
     SMARTPHONE("smartphone"),
     INTERNET("internet"),
     ONLY_CALLS("only_calls"),
@@ -16,6 +15,7 @@ public enum TariffEnum {
     PAYROLL("payroll"),
     DATE("date"),
     START("start"),
+    FINISH("finish"),
     INSIDE("inside"),
     OUTSIDE("outside"),
     LANDLINE("landline"),

@@ -6,7 +6,7 @@
 //
 
 
-package by.training.tariffs;
+package by.training.taskxml.entity.tariffs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlType;
 public class Tariffs {
 
     @XmlElementRef(name = "tariff", namespace = "http://www.training.by/tariffs", type = JAXBElement.class)
-    protected List<JAXBElement<? extends TariffType>> tariff;
+    protected List<TariffType> tariff;
 
     /**
      * Gets the value of the tariff property.
@@ -72,11 +72,11 @@ public class Tariffs {
      * 
      * 
      */
-    public List<JAXBElement<? extends TariffType>> getTariff() {
-        if (tariff == null) {
-            tariff = new ArrayList<JAXBElement<? extends TariffType>>();
-        }
-        return this.tariff;
+    public TariffType getTariff(int index) {
+        return tariff.get(index);
     }
 
+    public void setTariff(TariffType tariff) {
+        this.tariff.add(tariff);
+    }
 }

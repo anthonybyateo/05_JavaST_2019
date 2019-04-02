@@ -6,7 +6,7 @@
 //
 
 
-package by.training.tariffs;
+package by.training.taskxml.entity.tariffs;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -46,19 +46,19 @@ public class Parameters {
 
     @XmlElement(name = "favorite_number", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
-    protected BigInteger favoriteNumber;
+    protected int favoriteNumber;
     @XmlElement(name = "connection_fee", required = true)
-    protected BigDecimal connectionFee;
+    protected double connectionFee;
 
     /**
      * Gets the value of the favoriteNumber property.
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link int }
      *     
      */
-    public BigInteger getFavoriteNumber() {
+    public int getFavoriteNumber() {
         return favoriteNumber;
     }
 
@@ -67,10 +67,10 @@ public class Parameters {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link int }
      *     
      */
-    public void setFavoriteNumber(BigInteger value) {
+    public void setFavoriteNumber(int value) {
         this.favoriteNumber = value;
     }
 
@@ -79,10 +79,10 @@ public class Parameters {
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link double }
      *     
      */
-    public BigDecimal getConnectionFee() {
+    public double getConnectionFee() {
         return connectionFee;
     }
 
@@ -91,11 +91,18 @@ public class Parameters {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link double }
      *     
      */
-    public void setConnectionFee(BigDecimal value) {
+    public void setConnectionFee(double value) {
         this.connectionFee = value;
     }
 
+    @Override
+    public String toString() {
+        return "Parameters{" +
+                "favoriteNumber=" + favoriteNumber +
+                ", connectionFee=" + connectionFee +
+                '}';
+    }
 }

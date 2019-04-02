@@ -6,7 +6,7 @@
 //
 
 
-package by.training.tariffs;
+package by.training.taskxml.entity.tariffs;
 
 import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -53,11 +53,16 @@ public class OnlyCalls
     protected CallPrices callPrices;
     @XmlElement(name = "free_minute", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
-    protected BigInteger freeMinute;
+    protected int freeMinute;
     @XmlElement(required = true)
     protected Parameters parameters;
     @XmlAttribute(name = "tarrifing")
     protected String tarrifing;
+
+    public OnlyCalls() {
+        callPrices = new CallPrices();
+        parameters = new Parameters();
+    }
 
     /**
      * Gets the value of the callPrices property.
@@ -88,10 +93,10 @@ public class OnlyCalls
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link int }
      *     
      */
-    public BigInteger getFreeMinute() {
+    public int getFreeMinute() {
         return freeMinute;
     }
 
@@ -100,10 +105,10 @@ public class OnlyCalls
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link int }
      *     
      */
-    public void setFreeMinute(BigInteger value) {
+    public void setFreeMinute(int value) {
         this.freeMinute = value;
     }
 
@@ -159,4 +164,18 @@ public class OnlyCalls
         this.tarrifing = value;
     }
 
+    @Override
+    public String toString() {
+        return "OnlyCalls{" +
+                "callPrices=" + callPrices +
+                ", freeMinute=" + freeMinute +
+                ", parameters=" + parameters +
+                ", tarrifing='" + tarrifing + '\'' +
+                ", name='" + name + '\'' +
+                ", operatorName='" + operatorName + '\'' +
+                ", payroll=" + payroll +
+                ", dateType=" + dateType +
+                ", idnumber='" + idnumber + '\'' +
+                "}\n";
+    }
 }

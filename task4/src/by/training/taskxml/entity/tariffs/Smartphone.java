@@ -6,10 +6,8 @@
 //
 
 
-package by.training.tariffs;
+package by.training.taskxml.entity.tariffs;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -58,16 +56,20 @@ public class Smartphone
     protected CallPrices callPrices;
     @XmlElement(name = "free_minute", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
-    protected BigInteger freeMinute;
+    protected int freeMinute;
     @XmlElement(name = "internet_price", required = true)
-    protected BigDecimal internetPrice;
+    protected double internetPrice;
     @XmlElement(name = "free_mgb", required = true)
-    protected BigDecimal freeMgb;
+    protected double freeMgb;
     @XmlElement(required = true)
     protected Parameters parameters;
     @XmlAttribute(name = "tarrifing")
     protected String tarrifing;
 
+    public Smartphone() {
+        callPrices = new CallPrices();
+        parameters = new Parameters();
+    }
     /**
      * Gets the value of the callPrices property.
      * 
@@ -97,10 +99,10 @@ public class Smartphone
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link int }
      *     
      */
-    public BigInteger getFreeMinute() {
+    public int getFreeMinute() {
         return freeMinute;
     }
 
@@ -109,10 +111,10 @@ public class Smartphone
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link int }
      *     
      */
-    public void setFreeMinute(BigInteger value) {
+    public void setFreeMinute(int value) {
         this.freeMinute = value;
     }
 
@@ -121,10 +123,10 @@ public class Smartphone
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link double }
      *     
      */
-    public BigDecimal getInternetPrice() {
+    public double getInternetPrice() {
         return internetPrice;
     }
 
@@ -133,10 +135,10 @@ public class Smartphone
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link double }
      *     
      */
-    public void setInternetPrice(BigDecimal value) {
+    public void setInternetPrice(double value) {
         this.internetPrice = value;
     }
 
@@ -145,10 +147,10 @@ public class Smartphone
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link double }
      *     
      */
-    public BigDecimal getFreeMgb() {
+    public double getFreeMgb() {
         return freeMgb;
     }
 
@@ -157,10 +159,10 @@ public class Smartphone
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link double }
      *     
      */
-    public void setFreeMgb(BigDecimal value) {
+    public void setFreeMgb(double value) {
         this.freeMgb = value;
     }
 
@@ -216,4 +218,20 @@ public class Smartphone
         this.tarrifing = value;
     }
 
+    @Override
+    public String toString() {
+        return "Smartphone{" +
+                "callPrices=" + callPrices +
+                ", freeMinute=" + freeMinute +
+                ", internetPrice=" + internetPrice +
+                ", freeMgb=" + freeMgb +
+                ", parameters=" + parameters +
+                ", tarrifing='" + tarrifing + '\'' +
+                ", name='" + name + '\'' +
+                ", operatorName='" + operatorName + '\'' +
+                ", payroll=" + payroll +
+                ", dateType=" + dateType +
+                ", idnumber='" + idnumber + '\'' +
+                "}\n";
+    }
 }

@@ -41,7 +41,7 @@
                     <element name="parameters" type="tns:Parameters" />
                 </sequence>
 
-                <attribute name="tarrifing" type="tns:Tarrifing" use="optional" default="oneminute" />
+                <attribute name="tariffing" type="tns:Tariffing" use="optional" default="oneminute" />
             </extension>
         </complexContent>
     </complexType>
@@ -66,7 +66,7 @@
                     <element name="parameters" type="tns:Parameters" />
                 </sequence>
 
-                <attribute name="tarrifing" type="tns:Tarrifing" use="optional" default="oneminute" />
+                <attribute name="tarrifing" type="tns:Tariffing" use="optional" default="oneminute" />
             </extension>
         </complexContent>
     </complexType>
@@ -103,11 +103,11 @@
 
     <simpleType name="IdNumber">
         <restriction base="ID">
-            <pattern value="[a-zA-Z]{1,20}"/>
+            <pattern value="[0-9a-zA-Z]{1,20}"/>
         </restriction>
     </simpleType>
 
-    <simpleType name="Tarrifing">
+    <simpleType name="Tariffing">
         <restriction base="string">
             <enumeration value="oneminute" />
             <enumeration value="12seconds" />

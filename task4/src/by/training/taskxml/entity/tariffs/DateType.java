@@ -13,21 +13,23 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 
 /**
- * <p>Java class for Date complex type.
+ * <p>Java class for DateType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Date">
+ * &lt;complexType name="DateType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="start" type="{http://www.w3.org/2001/XMLSchema}date"/>
- *         &lt;element name="finish" type="{http://www.w3.org/2001/XMLSchema}date"/>
+ *         &lt;element name="start" type="{http://www.w3.org/2001/XMLSchema}dateType"/>
+ *         &lt;element name="finish" type="{http://www.w3.org/2001/XMLSchema}dateType"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,17 +39,17 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Date", propOrder = {
+@XmlType(name = "DateType", propOrder = {
     "start",
     "finish"
 })
-public class Date {
+public class DateType {
 
     @XmlElement(required = true)
-    @XmlSchemaType(name = "date")
+    @XmlSchemaType(name = "dateType")
     protected Date start;
     @XmlElement(required = true)
-    @XmlSchemaType(name = "date")
+    @XmlSchemaType(name = "dateType")
     protected Date finish;
 
     /**
@@ -100,9 +102,9 @@ public class Date {
 
     @Override
     public String toString() {
-        return "Date{" +
-                "start=" + start +
-                ", finish=" + finish +
+        return "DateType{" +
+                "start=" + new SimpleDateFormat("dd.MM.yyyy").format(start) +
+                ", finish=" + new SimpleDateFormat("dd.MM.yyyy").format(finish) +
                 '}';
     }
 }

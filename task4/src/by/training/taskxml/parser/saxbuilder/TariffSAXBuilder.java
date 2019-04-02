@@ -1,21 +1,19 @@
 package by.training.taskxml.parser.saxbuilder;
 
-import by.training.taskxml.entity.tariffs.TariffType;
-import by.training.taskxml.parser.BaseBuilder;
+import by.training.taskxml.parser.AbstractTariffBuilder;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
 import java.io.IOException;
-import java.util.Set;
 
-public class TariffSAXBuilder implements BaseBuilder {
+public class TariffSAXBuilder extends AbstractTariffBuilder {
 
-    private Set<TariffType> tariffs;
     private TariffHandler handler;
     private XMLReader reader;
 
     public TariffSAXBuilder() {
+        super();
         handler = new TariffHandler();
 
         try {
@@ -28,12 +26,7 @@ public class TariffSAXBuilder implements BaseBuilder {
     }
 
     @Override
-    public Set<TariffType> getTariffType() {
-        return tariffs;
-    }
-
-    @Override
-    public void buildTariffType(final String fileName) {
+    public void buildSetTariffType(final String fileName) {
         try {
             reader.parse(fileName);
         } catch (SAXException e) {

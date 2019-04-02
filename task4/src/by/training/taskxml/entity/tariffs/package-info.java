@@ -6,4 +6,4 @@
 //
 
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://www.training.by/tariffs", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package by.training.tariffs;
+package by.training.taskxml.entity.tariffs;

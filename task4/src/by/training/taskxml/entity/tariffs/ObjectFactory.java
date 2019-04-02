@@ -6,7 +6,7 @@
 //
 
 
-package by.training.tariffs;
+package by.training.taskxml.entity.tariffs;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -100,11 +100,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Date }
+     * Create an instance of {@link DateType }
      * 
      */
-    public Date createDate() {
-        return new Date();
+    public DateType createDate() {
+        return new DateType();
     }
 
     /**

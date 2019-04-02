@@ -6,9 +6,8 @@
 //
 
 
-package by.training.tariffs;
+package by.training.taskxml.entity.tariffs;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -33,7 +32,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="operator_name" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="payroll" type="{http://www.training.by/tariffs}NonNegativedecimal"/>
- *         &lt;element name="date" type="{http://www.training.by/tariffs}Date"/>
+ *         &lt;element name="dateType" type="{http://www.training.by/tariffs}DateType"/>
  *       &lt;/sequence>
  *       &lt;attribute name="idnumber" use="required" type="{http://www.training.by/tariffs}IdNumber" />
  *     &lt;/restriction>
@@ -48,7 +47,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "name",
     "operatorName",
     "payroll",
-    "date"
+    "dateType"
 })
 @XmlSeeAlso({
     Smartphone.class,
@@ -62,9 +61,9 @@ public class TariffType {
     @XmlElement(name = "operator_name", required = true)
     protected String operatorName;
     @XmlElement(required = true)
-    protected BigDecimal payroll;
+    protected double payroll;
     @XmlElement(required = true)
-    protected Date date;
+    protected DateType dateType = new DateType();
     @XmlAttribute(name = "idnumber", required = true)
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
@@ -123,10 +122,10 @@ public class TariffType {
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link double }
      *     
      */
-    public BigDecimal getPayroll() {
+    public double getPayroll() {
         return payroll;
     }
 
@@ -135,35 +134,35 @@ public class TariffType {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link double }
      *     
      */
-    public void setPayroll(BigDecimal value) {
+    public void setPayroll(double value) {
         this.payroll = value;
     }
 
     /**
-     * Gets the value of the date property.
+     * Gets the value of the dateType property.
      * 
      * @return
      *     possible object is
-     *     {@link Date }
+     *     {@link DateType }
      *     
      */
-    public Date getDate() {
-        return date;
+    public DateType getDateType() {
+        return dateType;
     }
 
     /**
-     * Sets the value of the date property.
+     * Sets the value of the dateType property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Date }
+     *     {@link DateType }
      *     
      */
-    public void setDate(Date value) {
-        this.date = value;
+    public void setDateType(DateType value) {
+        this.dateType = value;
     }
 
     /**
@@ -190,4 +189,14 @@ public class TariffType {
         this.idnumber = value;
     }
 
+    @Override
+    public String toString() {
+        return "TariffType{" +
+                "name='" + name + '\'' +
+                ", operatorName='" + operatorName + '\'' +
+                ", payroll=" + payroll +
+                ", dateType=" + dateType +
+                ", idnumber='" + idnumber + '\'' +
+                '}';
+    }
 }

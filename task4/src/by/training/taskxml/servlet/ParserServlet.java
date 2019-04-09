@@ -70,7 +70,7 @@ public class ParserServlet extends HttpServlet {
                     country = "GB";
                     language = "en";
                     break;
-                case "by":
+                case "be":
                     country = "BY";
                     language = "be";
                     break;
@@ -80,7 +80,6 @@ public class ParserServlet extends HttpServlet {
                     break;
             }
         }
-
 
         request.setAttribute("language", language);
 

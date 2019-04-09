@@ -31,7 +31,7 @@
                 <ul>
                     <li id="en"><a href="${pageContext.request.contextPath}/data?parser=${parser}&lang=en">EN</a></li>
                     <li id="ru"><a href="${pageContext.request.contextPath}/data?parser=${parser}&lang=ru">РУС</a></li>
-                    <li id="by"><a href="${pageContext.request.contextPath}/data?parser=${parser}&lang=by">БЕЛ</a></li>
+                    <li id="by"><a href="${pageContext.request.contextPath}/data?parser=${parser}&lang=be">БЕЛ</a></li>
                 </ul>
             </li>
 

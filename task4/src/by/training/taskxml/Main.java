@@ -1,11 +1,7 @@
 package by.training.taskxml;
 
-import by.training.taskxml.entity.tariffs.Smartphone;
 import by.training.taskxml.parser.AbstractTariffBuilder;
 import by.training.taskxml.parser.TariffBuilderFaactory;
-import by.training.taskxml.parser.dombuilder.TariffDOMBuilder;
-import by.training.taskxml.parser.saxbuilder.TariffSAXBuilder;
-import by.training.taskxml.parser.staxbuilder.TariffStAXBuilder;
 
 public class Main {
 
@@ -22,9 +18,9 @@ public class Main {
         domBuilder.buildSetTariffType(path);
         staxBuilder.buildSetTariffType(path);
 
-
-        System.out.println(saxBuilder.getTariffs());
-        System.out.println(domBuilder.getTariffs());
-        System.out.println(staxBuilder.getTariffs());
+        System.out.println(saxBuilder.getTariffs().toString());
+        System.out.println(domBuilder.getTariffs().toString());
+        System.out.println(staxBuilder.getTariffs().toString());
     }
 }
+

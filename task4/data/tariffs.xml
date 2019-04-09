@@ -26,28 +26,98 @@
         </parameters>
     </smartphone>
 
-    <smartphone idnumber="sup" tariffing="oneminute">
-        <name>Суп</name>
+    <smartphone idnumber="super2" tariffing="oneminute">
+        <name>Супер 2</name>
         <operator_name>МТС</operator_name>
         <payroll>15.5</payroll>
         <date>
-            <start>2019-03-22</start>
-            <finish>2019-06-22</finish>
+            <start>2019-03-12</start>
+            <finish>2019-08-12</finish>
         </date>
         <call_prices>
-            <inside>0.009</inside>
-            <outside>0.021</outside>
-            <landline>0.031</landline>
-            <sms>0.002</sms>
+            <inside>0.006</inside>
+            <outside>0.011</outside>
+            <landline>0.011</landline>
+            <sms>0.001</sms>
         </call_prices>
-        <free_minute>100</free_minute>
+        <free_minute>200</free_minute>
         <internet_price>0.01</internet_price>
-        <free_mgb>100</free_mgb>
+        <free_mgb>200</free_mgb>
         <parameters>
             <favorite_number>2</favorite_number>
             <connection_fee>2.97</connection_fee>
         </parameters>
     </smartphone>
+
+    <smartphone idnumber="super4" tariffing="oneminute">
+        <name>Супер 4</name>
+        <operator_name>МТС</operator_name>
+        <payroll>20.5</payroll>
+        <date>
+            <start>2019-03-12</start>
+            <finish>2019-09-12</finish>
+        </date>
+        <call_prices>
+            <inside>0.006</inside>
+            <outside>0.011</outside>
+            <landline>0.011</landline>
+            <sms>0.001</sms>
+        </call_prices>
+        <free_minute>400</free_minute>
+        <internet_price>0.01</internet_price>
+        <free_mgb>400</free_mgb>
+        <parameters>
+            <favorite_number>2</favorite_number>
+            <connection_fee>2.97</connection_fee>
+        </parameters>
+    </smartphone>
+
+    <smartphone idnumber="super8" tariffing="oneminute">
+        <name>Супер 8</name>
+        <operator_name>МТС</operator_name>
+        <payroll>25.5</payroll>
+        <date>
+            <start>2019-03-12</start>
+            <finish>2019-12-12</finish>
+        </date>
+        <call_prices>
+            <inside>0.006</inside>
+            <outside>0.011</outside>
+            <landline>0.011</landline>
+            <sms>0.001</sms>
+        </call_prices>
+        <free_minute>800</free_minute>
+        <internet_price>0.01</internet_price>
+        <free_mgb>800</free_mgb>
+        <parameters>
+            <favorite_number>8</favorite_number>
+            <connection_fee>2.97</connection_fee>
+        </parameters>
+    </smartphone>
+
+    <smartphone idnumber="superMax" tariffing="oneminute">
+        <name>Супер Max</name>
+        <operator_name>МТС</operator_name>
+        <payroll>30.5</payroll>
+        <date>
+            <start>2019-03-12</start>
+            <finish>2019-09-12</finish>
+        </date>
+        <call_prices>
+            <inside>0.006</inside>
+            <outside>0.011</outside>
+            <landline>0.011</landline>
+            <sms>0.001</sms>
+        </call_prices>
+        <free_minute>1000</free_minute>
+        <internet_price>0.01</internet_price>
+        <free_mgb>1000</free_mgb>
+        <parameters>
+            <favorite_number>10</favorite_number>
+            <connection_fee>2.97</connection_fee>
+        </parameters>
+    </smartphone>
+
 
     <internet idnumber="bit">
         <name>Бит</name>
@@ -58,10 +128,46 @@
             <finish>2019-07-25</finish>
         </date>
         <internet_price>0.01</internet_price>
-        <free_mgb>10000</free_mgb>
+        <free_mgb>200</free_mgb>
     </internet>
 
-    <only_calls idnumber="easySay" tarrifing="oneminute">
+    <internet idnumber="bit2">
+        <name>Бит 2</name>
+        <operator_name>МТС</operator_name>
+        <payroll>17.5</payroll>
+        <date>
+            <start>2019-04-25</start>
+            <finish>2019-07-25</finish>
+        </date>
+        <internet_price>0.01</internet_price>
+        <free_mgb>400</free_mgb>
+    </internet>
+
+    <internet idnumber="bit4">
+        <name>Бит 4</name>
+        <operator_name>МТС</operator_name>
+        <payroll>20.5</payroll>
+        <date>
+            <start>2019-04-25</start>
+            <finish>2019-07-25</finish>
+        </date>
+        <internet_price>0.01</internet_price>
+        <free_mgb>600</free_mgb>
+    </internet>
+
+    <internet idnumber="bitMax">
+        <name>Бит Max</name>
+        <operator_name>МТС</operator_name>
+        <payroll>25.5</payroll>
+        <date>
+            <start>2019-04-25</start>
+            <finish>2019-12-25</finish>
+        </date>
+        <internet_price>0.01</internet_price>
+        <free_mgb>1000</free_mgb>
+    </internet>
+
+    <only_calls idnumber="easySay" tariffing="oneminute">
         <name>Легко сказать</name>
         <operator_name>МТС</operator_name>
         <payroll>15.5</payroll>
@@ -82,4 +188,194 @@
         </parameters>
     </only_calls>
 
+    <only_calls idnumber="easySay2" tariffing="oneminute">
+        <name>Легко сказать 2</name>
+        <operator_name>Velcome</operator_name>
+        <payroll>15.5</payroll>
+        <date>
+            <start>2019-04-25</start>
+            <finish>2019-07-25</finish>
+        </date>
+        <call_prices>
+            <inside>0.005</inside>
+            <outside>0.011</outside>
+            <landline>0.011</landline>
+            <sms>0.001</sms>
+        </call_prices>
+        <free_minute>250</free_minute>
+        <parameters>
+            <favorite_number>2</favorite_number>
+            <connection_fee>2.97</connection_fee>
+        </parameters>
+    </only_calls>
+
+    <only_calls idnumber="easySays4" tariffing="oneminute">
+        <name>Легко сказать 4</name>
+        <operator_name>МТС</operator_name>
+        <payroll>25.5</payroll>
+        <date>
+            <start>2019-04-25</start>
+            <finish>2019-07-25</finish>
+        </date>
+        <call_prices>
+            <inside>0.001</inside>
+            <outside>0.001</outside>
+            <landline>0.001</landline>
+            <sms>0.0002</sms>
+        </call_prices>
+        <free_minute>550</free_minute>
+        <parameters>
+            <favorite_number>2</favorite_number>
+            <connection_fee>2.97</connection_fee>
+        </parameters>
+    </only_calls>
+
+    <only_calls idnumber="easySaysMax" tariffing="oneminute">
+        <name>Легко сказать Max</name>
+        <operator_name>Velcome</operator_name>
+        <payroll>35.5</payroll>
+        <date>
+            <start>2019-04-25</start>
+            <finish>2019-11-25</finish>
+        </date>
+        <call_prices>
+            <inside>0.001</inside>
+            <outside>0.001</outside>
+            <landline>0.001</landline>
+            <sms>0.0002</sms>
+        </call_prices>
+        <free_minute>1000</free_minute>
+        <parameters>
+            <favorite_number>4</favorite_number>
+            <connection_fee>2.97</connection_fee>
+        </parameters>
+    </only_calls>
+
+    <smartphone idnumber="Comfort" tariffing="oneminute">
+        <name>Комфорт</name>
+        <operator_name>Velcome</operator_name>
+        <payroll>10.5</payroll>
+        <date>
+            <start>2019-03-22</start>
+            <finish>2019-07-22</finish>
+        </date>
+        <call_prices>
+            <inside>0.006</inside>
+            <outside>0.031</outside>
+            <landline>0.041</landline>
+            <sms>0.001</sms>
+        </call_prices>
+        <free_minute>500</free_minute>
+        <internet_price>0.03</internet_price>
+        <free_mgb>500</free_mgb>
+        <parameters>
+            <favorite_number>0</favorite_number>
+            <connection_fee>2.97</connection_fee>
+        </parameters>
+    </smartphone>
+
+    <smartphone idnumber="Comfort2" tariffing="oneminute">
+        <name>Комфорт 2</name>
+        <operator_name>Velcome</operator_name>
+        <payroll>15.5</payroll>
+        <date>
+            <start>2019-03-22</start>
+            <finish>2019-08-22</finish>
+        </date>
+        <call_prices>
+            <inside>0.006</inside>
+            <outside>0.031</outside>
+            <landline>0.041</landline>
+            <sms>0.001</sms>
+        </call_prices>
+        <free_minute>800</free_minute>
+        <internet_price>0.03</internet_price>
+        <free_mgb>800</free_mgb>
+        <parameters>
+            <favorite_number>0</favorite_number>
+            <connection_fee>2.97</connection_fee>
+        </parameters>
+    </smartphone>
+
+    <smartphone idnumber="Comfort4" tariffing="oneminute">
+        <name>Комфорт 4</name>
+        <operator_name>Velcome</operator_name>
+        <payroll>20.5</payroll>
+        <date>
+            <start>2019-03-22</start>
+            <finish>2019-09-22</finish>
+        </date>
+        <call_prices>
+            <inside>0.006</inside>
+            <outside>0.021</outside>
+            <landline>0.021</landline>
+            <sms>0.001</sms>
+        </call_prices>
+        <free_minute>900</free_minute>
+        <internet_price>0.01</internet_price>
+        <free_mgb>800</free_mgb>
+        <parameters>
+            <favorite_number>0</favorite_number>
+            <connection_fee>2.97</connection_fee>
+        </parameters>
+    </smartphone>
+
+    <smartphone idnumber="ComfortMax" tariffing="oneminute">
+        <name>Комфорт Max</name>
+        <operator_name>Velcome</operator_name>
+        <payroll>25.5</payroll>
+        <date>
+            <start>2019-03-22</start>
+            <finish>2019-12-22</finish>
+        </date>
+        <call_prices>
+            <inside>0.006</inside>
+            <outside>0.011</outside>
+            <landline>0.021</landline>
+            <sms>0.001</sms>
+        </call_prices>
+        <free_minute>1000</free_minute>
+        <internet_price>0.03</internet_price>
+        <free_mgb>1000</free_mgb>
+        <parameters>
+            <favorite_number>2</favorite_number>
+            <connection_fee>2.97</connection_fee>
+        </parameters>
+    </smartphone>
+
+    <internet idnumber="lite">
+        <name>Лайт</name>
+        <operator_name>МТС</operator_name>
+        <payroll>5.5</payroll>
+        <date>
+            <start>2019-04-25</start>
+            <finish>2019-07-25</finish>
+        </date>
+        <internet_price>0.01</internet_price>
+        <free_mgb>100</free_mgb>
+    </internet>
+
+    <internet idnumber="liteMini">
+        <name>Лайт Mini</name>
+        <operator_name>МТС</operator_name>
+        <payroll>3.5</payroll>
+        <date>
+            <start>2019-04-25</start>
+            <finish>2019-12-25</finish>
+        </date>
+        <internet_price>0.01</internet_price>
+        <free_mgb>50</free_mgb>
+    </internet>
+
+    <internet idnumber="liteMax">
+        <name>Лайт Max</name>
+        <operator_name>МТС</operator_name>
+        <payroll>10.5</payroll>
+        <date>
+            <start>2019-04-25</start>
+            <finish>2019-12-25</finish>
+        </date>
+        <internet_price>0.01</internet_price>
+        <free_mgb>1000</free_mgb>
+    </internet>
 </tariffs>

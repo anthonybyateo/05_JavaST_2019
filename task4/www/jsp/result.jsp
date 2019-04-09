@@ -1,43 +1,41 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Task4</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <link rel="icon" href="../img/icotab.png">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="icon" href="img/icotab.png">
 </head>
 <body>
     <header>
         <div class="head">
-            <div class="ico"><a href="#"><img src="../img/icohead.png"></a></div>
+            <div class="ico"><a href="index.jsp"><img src="img/icohead.png"></a></div>
+            <div>${result}</div>
         </div>
     </header>
 
-    <s:url var="indexEN" namespace="/" action="locale" >
-        <s:param name="request_locale" >en</s:param>
-    </s:url>
-
     <nav id="menuVertical">
         <ul>
-            <li><a href="#"><div class="img_n"><img src="../img/parser.png"></div></a>
+            <li><div class="submenu"><div class="img_n"><img src="img/parser.png"></div></div>
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/data">SAX</a></li>
-                    <li><a href="${pageContext.request.contextPath}/data">DOM</a></li>
-                    <li><a href="${pageContext.request.contextPath}/data">STAX</a></li>
+                    <li><a href="${pageContext.request.contextPath}/data?parser=sax&lang=${language}">SAX</a></li>
+                    <li><a href="${pageContext.request.contextPath}/data?parser=dom&lang=${language}">DOM</a></li>
+                    <li><a href="${pageContext.request.contextPath}/data?parser=stax&lang=${language}">STAX</a></li>
                 </ul>
             </li>
 
-            <li><a href="#"><div class="img_n"><img src="../img/localization.png"></div></a>
+            <li><div class="submenu"><div class="img_n"><img src="img/localization.png"></div></div>
                 <ul>
-                    <li id="en"><a href="#">${en}</a></li>
-                    <li id="ru"><a href="${pageContext.request.contextPath}/data">${ru}</a></li>
-                    <li id="by"><a href="${pageContext.request.contextPath}/data">${by}</a></li>
+                    <li id="en"><a href="${pageContext.request.contextPath}/data?parser=${parser}&lang=en">EN</a></li>
+                    <li id="ru"><a href="${pageContext.request.contextPath}/data?parser=${parser}&lang=ru">РУС</a></li>
+                    <li id="by"><a href="${pageContext.request.contextPath}/data?parser=${parser}&lang=by">БЕЛ</a></li>
                 </ul>
             </li>
 
-            <li><a href="#"><div class="img_n"><img src="../img/home.png"></div></a></li>
+            <li><a href="index.jsp"><div class="img_n"><img src="img/home.png"></div></a></li>
         </ul>
     </nav>
     <div class="menu"><div class="footer">Copyright © 2019<br>
@@ -46,18 +44,18 @@
     <table>
       <thead>
         <tr>
-          <th>Name</th>
-          <th>idnumber</th>
-          <th>Operator name</th>
-          <th>payroll</th>
-          <th>data</th>
-          <th>internet price</th>
-          <th>free mgb</th>
-          <th>inside / outside / landline / sms</th>
-          <th>tariffing</th>
-          <th>free minute</th>
-          <th>favorite number</th>
-          <th>connection fee</th>
+          <th>${name}</th>
+          <th>${id}</th>
+          <th>${operator}</th>
+          <th>${payroll}</th>
+          <th>${data}</th>
+          <th>${internetPrice}</th>
+          <th>${mgb}</th>
+          <th>${callPrices}</th>
+          <th>${tariffing}</th>
+          <th>${minute}</th>
+          <th>${favNumber}</th>
+          <th>${connection}</th>
         </tr>
       </thead>
       <tbody>
@@ -67,14 +65,24 @@
                 <td><c:out value="${ elem.idnumber }" /></td>
                 <td><c:out value="${ elem.operatorName }" /></td>
                 <td><c:out value="${ elem.payroll }" /></td>
-                <td><c:out value="${ elem.dateType.start }" /> - <c:out value="${ elem.dateType.finish }" /></td>
+                <td>
+                    <c:set var="lang" value="${language}"/>
+                    <c:if test="${lang == 'en'}">
+                    <fmt:formatDate pattern = "MM/dd/yyyy" value = "${ elem.dateType.start }" />-
+                    <fmt:formatDate pattern = "MM/dd/yyyy" value = "${ elem.dateType.finish }" />
+                    </c:if>
+                    <c:if test="${lang != 'en'}">
+                    <fmt:formatDate type = "date" value = "${ elem.dateType.start }" />-
+                    <fmt:formatDate type = "date" value = "${ elem.dateType.finish }" />
+                    </c:if>
+                </td>
                 <c:if test="${ elem.getClass().getSimpleName() != 'OnlyCalls' }">
                     <td><c:out value="${ elem.internetPrice }" /></td>
                     <td><c:out value="${ elem.freeMgb }" /></td>
                 </c:if>
                 <c:if test="${ elem.getClass().getSimpleName() == 'OnlyCalls' }">
-                    <td></td>
-                    <td></td>
+                    <td>—</td>
+                    <td>—</td>
                 </c:if>
                 <c:if test="${ elem.getClass().getSimpleName() != 'Internet' }">
                     <td>
@@ -89,18 +97,16 @@
                     <td><c:out value="${ elem.parameters.connectionFee }" /></td>
                 </c:if>
                 <c:if test="${ elem.getClass().getSimpleName() == 'Internet' }">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                 </c:if>
             </tr>
         </c:forEach>
       </tbody>
     </table>
-
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="js/language.js" type="text/javascript"></script>
+    
 </body>
 </html>

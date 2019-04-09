@@ -9,6 +9,7 @@
 package by.training.taskxml.entity.tariffs;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -108,5 +109,19 @@ public class Internet
                 ", dateType=" + dateType +
                 ", idnumber='" + idnumber + '\'' +
                 "}\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Internet)) return false;
+        Internet internet = (Internet) o;
+        return Double.compare(internet.getInternetPrice(), getInternetPrice()) == 0 &&
+                Double.compare(internet.getFreeMgb(), getFreeMgb()) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getInternetPrice(), getFreeMgb());
     }
 }

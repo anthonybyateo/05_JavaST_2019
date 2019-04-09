@@ -2,7 +2,7 @@ package test.taskxml.parser;
 
 import by.training.taskxml.entity.tariffs.DateType;
 import by.training.taskxml.entity.tariffs.Internet;
-import by.training.taskxml.parser.dombuilder.TariffDOMBuilder;
+import by.training.taskxml.parser.staxbuilder.TariffStAXBuilder;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -11,14 +11,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class TariffDOMBuilderTest {
+public class TariffStAXBuilderTest {
 
-    TariffDOMBuilder builder;
+    TariffStAXBuilder builder;
     Internet internet;
 
     @BeforeClass
     public void setUp() throws ParseException {
-        builder = new TariffDOMBuilder();
+        builder = new TariffStAXBuilder();
         internet = new Internet();
         internet.setIdnumber("bit");
         internet.setName("Бит");

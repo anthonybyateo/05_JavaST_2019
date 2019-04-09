@@ -1,4 +1,4 @@
-package by.training.taskxml;
+package by.training.taskxml.main;
 
 import by.training.taskxml.parser.AbstractTariffBuilder;
 import by.training.taskxml.parser.TariffBuilderFaactory;

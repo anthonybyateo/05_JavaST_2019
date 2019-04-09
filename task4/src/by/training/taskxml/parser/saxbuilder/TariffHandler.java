@@ -7,6 +7,8 @@ import by.training.taskxml.entity.tariffs.TariffType;
 import by.training.taskxml.parser.TariffEnum;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,6 +19,7 @@ import java.util.Set;
 
 public class TariffHandler extends DefaultHandler {
 
+    static final Logger LOGGER = LogManager.getLogger(TariffHandler.class);
     private Set<TariffType> tariffs;
     private TariffType current = null;
     private TariffEnum currentEnum = null;
@@ -92,8 +95,7 @@ public class TariffHandler extends DefaultHandler {
                                 .parse(str);
                         current.getDateType().setStart(startDate);
                     } catch (ParseException e) {
-                        //TODO log
-                        e.printStackTrace();
+                        LOGGER.warn("failure of parsing date string");
                     }
                     break;
                 case FINISH:
@@ -102,8 +104,7 @@ public class TariffHandler extends DefaultHandler {
                                 .parse(str);
                         current.getDateType().setFinish(finishDate);
                     } catch (ParseException e) {
-                        //TODO log
-                        e.printStackTrace();
+                        LOGGER.warn("failure of parsing date string");
                     }
                     break;
                     default:

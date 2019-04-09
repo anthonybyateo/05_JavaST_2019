@@ -3,6 +3,8 @@ package by.training.taskxml.parser.staxbuilder;
 import by.training.taskxml.entity.tariffs.*;
 import by.training.taskxml.parser.AbstractTariffBuilder;
 import by.training.taskxml.parser.TariffEnum;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -18,6 +20,7 @@ import java.util.Date;
 
 public class TariffStAXBuilder extends AbstractTariffBuilder {
 
+    static final Logger LOGGER = LogManager.getLogger(TariffStAXBuilder.class);
     private XMLInputFactory inputFactory;
 
     public TariffStAXBuilder() {
@@ -50,19 +53,16 @@ public class TariffStAXBuilder extends AbstractTariffBuilder {
                 }
             }
         } catch (XMLStreamException ex) {
-            //TODO log
-            System.err.println("StAX parsing error! " + ex.getMessage());
+            LOGGER.warn("StAX parsing error!");
         } catch (FileNotFoundException ex) {
-            //TODO log
-            System.err.println("File " + fileName + " not found! " + ex);
+            LOGGER.warn("File " + fileName + " not found!");
         } finally {
             try {
                 if (inputStream != null) {
                     inputStream.close();
                 }
             } catch (IOException e) {
-                //TODO log
-                System.err.println("Impossible close file " + fileName + " : " + e);
+                LOGGER.warn("Impossible close file " + fileName);
             }
         }
     }
@@ -217,7 +217,6 @@ public class TariffStAXBuilder extends AbstractTariffBuilder {
                 }
             }
         }
-        //TODO log
         throw new XMLStreamException("Unknown element in tag Student");
     }
 
@@ -259,7 +258,6 @@ public class TariffStAXBuilder extends AbstractTariffBuilder {
                     break;
             }
         }
-        //TODO log
         throw new XMLStreamException("Unknown element in tag call_prices");
     }
 
@@ -293,7 +291,6 @@ public class TariffStAXBuilder extends AbstractTariffBuilder {
                     break;
             }
         }
-        //TODO log
         throw new XMLStreamException("Unknown element in tag Parameters");
     }
 
@@ -316,8 +313,7 @@ public class TariffStAXBuilder extends AbstractTariffBuilder {
                                                 .parse(name);
                                 dateType.setStart(startDate);
                             } catch (ParseException e) {
-                                //TODO log
-                                e.printStackTrace();
+                                LOGGER.warn("failure of parsing date string");
                             }
                             break;
                         case FINISH:
@@ -328,8 +324,7 @@ public class TariffStAXBuilder extends AbstractTariffBuilder {
                                         .parse(name);
                                 dateType.setFinish(finishDate);
                             } catch (ParseException e) {
-                                //TODO log
-                                e.printStackTrace();
+                                LOGGER.warn("failure of parsing date string");
                             }
                             break;
                     }
@@ -343,7 +338,6 @@ public class TariffStAXBuilder extends AbstractTariffBuilder {
                     break;
             }
         }
-        //TODO log
         throw new XMLStreamException("Unknown element in tag Date");
     }
 

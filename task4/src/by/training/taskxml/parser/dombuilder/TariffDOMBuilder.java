@@ -8,6 +8,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -17,8 +19,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class TariffDOMBuilder extends AbstractTariffBuilder {
 
+    static final Logger LOGGER = LogManager.getLogger(TariffDOMBuilder.class);
     private DocumentBuilder docBuilder;
 
     public TariffDOMBuilder() {
@@ -28,8 +32,7 @@ public class TariffDOMBuilder extends AbstractTariffBuilder {
         try {
             docBuilder = factory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
-            //TODO log
-            e.printStackTrace();
+            LOGGER.error("failure of creation DocumentBuilderFactory");
         }
     }
 
@@ -56,11 +59,9 @@ public class TariffDOMBuilder extends AbstractTariffBuilder {
             addTariff(tariffList3);
 
         } catch (SAXException e) {
-            //TODO log
-            e.printStackTrace();
+            LOGGER.warn("failure of parsing doc");
         } catch (IOException e) {
-            //TODO log
-            e.printStackTrace();
+            LOGGER.error("error i/o");
         }
     }
 
@@ -90,8 +91,7 @@ public class TariffDOMBuilder extends AbstractTariffBuilder {
                             TariffEnum.START.getValue()));
             dateType.setStart(startDate);
         } catch (ParseException e) {
-            //TODO log
-            e.printStackTrace();
+            LOGGER.warn("failure of parsing date string");
         }
         try {
             Date finishDate = new SimpleDateFormat("yyyy-MM-dd")
@@ -99,8 +99,7 @@ public class TariffDOMBuilder extends AbstractTariffBuilder {
                             TariffEnum.FINISH.getValue()));
             dateType.setFinish(finishDate);
         } catch (ParseException e) {
-            //TODO log
-            e.printStackTrace();
+            LOGGER.warn("failure of parsing date string");
         }
     }
 

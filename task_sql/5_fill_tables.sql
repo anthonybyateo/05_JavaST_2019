@@ -10,7 +10,7 @@ INSERT INTO `infousers`
 (`user_id`, `birthday`,  `name`, `lastname`, `patronymic`, `avatar`)
 VALUES
 (2,         "2000-09-21", "Иван",   "Иванов",    "Иванович", "+375 (29) 123-45-67"),
-(3,         "1999-12-05", "Петр",   "Петров",    "Петрович", "+375 (29) 234-56-78");
+(3,         "1999-12-05", "Петр",   "Петров",    "Петович", "+375 (29) 234-56-78");
 
 INSERT INTO `subscription`
 (`subscriber_id`, `user_id`)
